@@ -1,6 +1,4 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
-import config from "./config";
-import { HandleRefreshToken } from "@/components/auth/RefreshToken";
 
 // Create an axios instance with type safety
 const axiosInstance: AxiosInstance = axios.create({
@@ -39,7 +37,6 @@ axiosInstance.interceptors.response.use(
       const now = new Date();
       const formatted = now.toUTCString();
       document.cookie = `auth_token=; path=/; expires=${formatted}`;
-      document.cookie = `permissions=; path=/; expires=${formatted}`;
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       if (typeof window !== "undefined") {

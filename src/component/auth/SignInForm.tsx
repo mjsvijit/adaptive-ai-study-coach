@@ -1,5 +1,4 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import { Form, Formik, Field, ErrorMessage } from "formik";
@@ -13,8 +12,6 @@ import { handleAgentLogin } from "@/src/services/login";
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const inputClasses = `h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden ring-0 focus:ring-1 focus:ring-brand-400 duration-200 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 `;
 
   interface LoginFormValues {
@@ -27,35 +24,6 @@ export default function SignInForm() {
     password: "",
   };
 
-  const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
-  const registrationSchema = Yup.object({
-    company: Yup.string().required("Company is required"),
-    address: Yup.string().required("Address is required"),
-    first_name: Yup.string().required("First Name is required"),
-    last_name: Yup.string().required("Last Name is required"),
-    email: Yup.string()
-      .email()
-      .matches(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        "please enter valid email address",
-      )
-      .required("email is required"),
-    mobile: Yup.string()
-      .matches(
-        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
-        "please enter valid mobile number",
-      )
-      .required("mobile is required"),
-    password: Yup.string()
-      .matches(passwordRules, {
-        message: `Please create a stronger password, Atleast one lower, one upper and one special charecter`,
-      })
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-    confirm_password: Yup.string()
-      .required("Confirm Password is required")
-      .oneOf([Yup.ref("password")], "Password must match"),
-  });
   function handleSubmit(
     values: LoginFormValues,
     formikHelpers: {
@@ -63,16 +31,13 @@ export default function SignInForm() {
       setSubmitting: (isSubmitting: boolean) => void;
     },
   ) {
-    console.log("values", values);
     handleAgentLogin(values)
       .then((res: any) => {
-        console.log("res", res);
         formikHelpers.resetForm();
         const expiresIn = 7 * 24 * 60 * 60; // 604800 seconds
         document.cookie = `auth_token=${res.jwt}; path=/; max-age=${expiresIn}`;
         localStorage.setItem("user", JSON.stringify(res?.user));
         localStorage.setItem("token", res?.jwt);
-
         window.location.href = "/";
         toast.success("Login successful");
       })
@@ -80,7 +45,6 @@ export default function SignInForm() {
         toast.error(
           err?.message?.response?.data?.error?.message || "Login failed",
         );
-        console.log("err", err);
       });
   }
 
@@ -105,12 +69,7 @@ export default function SignInForm() {
                   .email("Invalid email id")
                   .required("Email id is required"),
 
-                password: Yup.string()
-                  // .matches(passwordRules, {
-                  //   message: `Please create a stronger password, Atleast one lower, one upper and one special charecter`,
-                  // })
-                  // .min(6, "Password must be at least 6 characters")
-                  .required("Password is required"),
+                password: Yup.string().required("Password is required"),
               })}
               onSubmit={handleSubmit}
             >
@@ -157,22 +116,13 @@ export default function SignInForm() {
                         <ErrorMessage name="password" />
                       </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Checkbox checked={isChecked} onChange={setIsChecked} />
-                        <span className="block font-normal text-gray-700 text-theme-sm dark:text-gray-400">
-                          Keep me logged in
-                        </span>
-                      </div>
-                      <Link
-                        href="/reset-password"
-                        className="text-sm text-brand-700 hover:text-brand-400 dark:text-brand-400 duration-200 hover:dark:text-brand-500"
-                      >
-                        Forgot password?
-                      </Link>
-                    </div>
                     <div>
-                      <Button className="w-full" size="sm" type="submit">
+                      <Button
+                        className="w-full"
+                        size="sm"
+                        type="submit"
+                        variant="outline"
+                      >
                         Sign in
                       </Button>
                     </div>
@@ -182,7 +132,7 @@ export default function SignInForm() {
             </Formik>
 
             <div className="mt-5">
-              {/* <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
+              <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
                 Don&apos;t have an account? {""}
                 <Link
                   href="/signup"
@@ -190,19 +140,11 @@ export default function SignInForm() {
                 >
                   Sign Up
                 </Link>
-              </p> */}
+              </p>
             </div>
           </div>
         </div>
       </div>
-      {/* <ToastContainer /> */}
     </div>
   );
 }
-// const SplitColorSlider = () => (
-//   <Suspense fallback={<div>Loading...</div>}>
-//     <SignInForm />
-//   </Suspense>
-// );
-
-// export default SplitColorSlider;

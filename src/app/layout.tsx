@@ -1,21 +1,12 @@
-import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap-icons/font/bootstrap-icons.css"; // optional
-// import RouteWatcher from "@/components/route-watcher";
 import { ThemeProvider } from "../context/ThemeContext";
 import { SidebarProvider } from "../context/SidebarContext";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+import "../lib/fontawsome";
 
 export const metadata: Metadata = {
-  title: "Oligers Cargo",
-  description: "Oligers Cargo - Cargo Management Platform",
+  title: "Adaptive AI Study Coach",
+  description: "Your personalized AI study partner, goal tracker, and organizer.",
 };
 
 export default function RootLayout({
@@ -25,8 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+      </head>
       <body
-        className={`${inter.className} dark:bg-gray-900`}
+        className="font-sans dark:bg-gray-900"
         suppressHydrationWarning
       >
         <ThemeProvider>

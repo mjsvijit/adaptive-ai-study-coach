@@ -47,14 +47,14 @@ export const tableCellClasses =
 export const tableActionCellButtonWrapperClasses =
   "flex items-center justify-end gap-1";
 export const tableActionBtnCommonClasses =
-  "disabled:cursor-not-allowed disabled:opacity-50 inline-flex items-center justify-center gap-2 transition rounded-md px-1.5 py-1.5 text-lg font-medium duration-200 w-8 h-8 ring-1 ring-inset focus:outline-none";
+  "disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer inline-flex items-center justify-center gap-2 transition rounded-md px-1.5 py-1.5 text-lg font-medium duration-200 w-8 h-8 ring-1 ring-inset focus:outline-none";
 export const tableActionPrimaryButtonClasses = `${tableActionBtnCommonClasses} text-brand-600 bg-brand-100 hover:bg-brand-700 hover:text-brand-50 ring-brand-200 hover:ring-brand-700 shadow-theme-xs disabled:bg-blue-300`;
 export const tableActionSecondaryButtonClasses = `${tableActionBtnCommonClasses} text-orange-600 bg-orange-100 hover:bg-orange-700 hover:text-orange-50 ring-orange-200 hover:ring-orange-700 shadow-theme-xs disabled:bg-orange-300`;
 export const tableActionInfoButtonClasses = `${tableActionBtnCommonClasses} text-blue-light-600 bg-blue-light-100 hover:bg-blue-light-700 hover:text-blue-light-50 ring-blue-light-200 hover:ring-blue-light-700 shadow-theme-xs disabled:bg-blue-light-300`;
 export const tableActionWarningButtonClasses = `${tableActionBtnCommonClasses} text-warning-600 bg-warning-100 hover:bg-warning-700 hover:text-warning-50 ring-warning-200 hover:ring-warning-700 shadow-theme-xs disabled:bg-warning-300`;
 export const tableActionDangerButtonClasses = `${tableActionBtnCommonClasses} text-error-600 bg-error-100 hover:bg-error-700 hover:text-error-50 ring-error-200 hover:ring-error-700 shadow-theme-xs disabled:bg-error-300`;
 export const previewActionBtnCommonClasses =
-  "disabled:cursor-not-allowed disabled:opacity-50 inline-flex items-center justify-center gap-2 transition rounded-md px-1.5 py-1.5 text-lg font-medium duration-200 w-auto h-auto ring-1 ring-inset focus:outline-none";
+  "disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer inline-flex items-center justify-center gap-2 transition rounded-md px-1.5 py-1.5 text-lg font-medium duration-200 w-auto h-auto ring-1 ring-inset focus:outline-none";
 export const previewbutton = `${previewActionBtnCommonClasses} text-orange-600 bg-orange-100 hover:bg-orange-700 hover:text-orange-50 ring-orange-200 hover:ring-orange-700 shadow-theme-xs disabled:bg-orange-300`;
 export const submitButton = `${previewActionBtnCommonClasses} text-blue-600 bg-blue-100 hover:bg-blue-700 hover:text-blue-50 ring-blue-200 hover:ring-blue-700 shadow-theme-xs disabled:bg-blue-300`;
 // Table Component
